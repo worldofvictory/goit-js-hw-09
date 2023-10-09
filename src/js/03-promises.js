@@ -7,11 +7,11 @@ const formRef = document.querySelector('.form');
 
 
 formRef.addEventListener('submit', onSubmitForm);
-
+  
 
 function onSubmitForm(e) {
   e.preventDefault();
-
+  e.currentTarget.reset();
   let delay = Number(formRef.delay.value);
 
   for (let i = 1; i <= formRef.amount.value; i += 1) {
@@ -23,9 +23,10 @@ function onSubmitForm(e) {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
     delay += Number(formRef.step.value);
+    
   }
+  
 }
-
 
 function createPromise(position, delay) {
   const obj = { position, delay };
@@ -42,4 +43,6 @@ function createPromise(position, delay) {
       }
     }, delay);
   });
+  
+reset(formRef)
 }
